@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SolarEconomia – Simulador de Economia com Energia Solar</title>
+  <meta name="description" content="Simule economia na conta de luz e a redução de CO₂ com energia solar. Plataforma didática, gratuita e responsiva." />
+  <meta name="keywords" content="energia solar, simulador fotovoltaico, economia de energia, sustentabilidade, CO2" />
+  <meta property="og:title" content="SolarEconomia – Simulador de Economia" />
+  <meta property="og:description" content="Transforme consumo em economia e sustentabilidade com simulações personalizadas." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a'
+            },
+            solar: '#f59e0b'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Pequenos aprimoramentos visuais */
+    .glass{backdrop-filter:saturate(180%) blur(10px);background:rgba(255,255,255,.7)}
+    .shadow-soft{box-shadow:0 10px 25px rgba(2,6,23,.08), 0 4px 10px rgba(2,6,23,.06)}
+    html{scroll-behavior:smooth}
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-solar/20 selection:text-slate-900">
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 bg-white/70 glass shadow-sm">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#top" class="flex items-center gap-2 font-semibold text-brand-700 hover:opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-solar"><path d="M12 3a1 1 0 011 1v2a1 1 0 11-2 0V4a1 1 0 011-1zm0 14a5 5 0 100-10 5 5 0 000 10zm9-5a1 1 0 01-1 1h-2a1 1 0 110-2h2a1 1 0 011 1zM6 12a1 1 0 01-1 1H3a1 1 0 110-2h2a1 1 0 011 1zm12.364 7.364a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 111.414-1.414l1.414 1.414a1 1 0 010 1.414zM8.464 7.05A1 1 0 017.05 8.464L5.636 7.05A1 1 0 117.05 5.636L8.464 7.05zM18.364 7.05L16.95 5.636A1 1 0 1118.364 4.22L19.778 5.636A1 1 0 1118.364 7.05zM7.05 16.95l-1.414 1.414A1 1 0 114.22 16.95l1.414-1.414A1 1 0 117.05 16.95z"/></svg>
+          <span>SolarEconomia</span>
+        </a>
+        <div class="hidden gap-6 md:flex">
+          <a href="#como-funciona" class="text-sm font-medium text-slate-700 hover:text-brand-700">Como funciona</a>
+          <a href="#beneficios" class="text-sm font-medium text-slate-700 hover:text-brand-700">Benefícios</a>
+          <a href="#vta" class="text-sm font-medium text-slate-700 hover:text-brand-700">VTA</a>
+          <a href="#cta" class="text-sm font-medium text-slate-700 hover:text-brand-700">Simular</a>
+        </div>
+        <a href="#cta" class="rounded-xl bg-solar px-4 py-2 text-sm font-semibold text-white shadow-soft hover:-translate-y-0.5 hover:shadow-lg transition">Fazer Simulação</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 via-white to-slate-50"></div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">UPX 3 • Projeto Acadêmico</span>
+        <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Transforme consumo em <span class="text-solar">economia</span> e <span class="text-brand-700">sustentabilidade</span></h1>
+        <p class="mt-4 text-lg text-slate-700">Uma plataforma interativa que traduz seus dados de consumo de energia em simulações personalizadas de <strong>custo‑benefício</strong> e <strong>redução de CO₂</strong>, promovendo aprendizado em energia renovável.</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a href="#cta" class="inline-flex items-center justify-center rounded-xl bg-solar px-6 py-3 font-semibold text-white shadow-soft hover:-translate-y-0.5 transition">Fazer minha simulação</a>
+          <a href="#como-funciona" class="inline-flex items-center justify-center rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-700 hover:bg-white/60">Ver como funciona</a>
+        </div>
+        <p class="mt-3 text-xs text-slate-500">Gratuito • Sem cadastro • Resultado instantâneo</p>
+      </div>
+      <div class="relative">
+        <div class="absolute -inset-8 -z-10 blur-3xl opacity-30 bg-gradient-to-tr from-solar to-brand-500 rounded-full"></div>
+        <div class="glass shadow-soft rounded-2xl p-6">
+          <div class="grid grid-cols-2 gap-4 text-center">
+            <div class="rounded-xl bg-white p-6 shadow-sm">
+              <p class="text-xs text-slate-500">Economia estimada</p>
+              <p class="mt-1 text-3xl font-extrabold">R$ 218/mês</p>
+            </div>
+            <div class="rounded-xl bg-white p-6 shadow-sm">
+              <p class="text-xs text-slate-500">CO₂ evitado</p>
+              <p class="mt-1 text-3xl font-extrabold">74 kg/mês</p>
+            </div>
+            <div class="col-span-2 rounded-xl bg-white p-6 shadow-sm">
+              <p class="text-xs text-slate-500">Payback estimado</p>
+              <p class="mt-1 text-2xl font-extrabold">3,8 anos</p>
+            </div>
+          </div>
+          <p class="mt-4 text-[13px] text-slate-500">*Valores ilustrativos para demonstrar a interface. Os resultados reais dependem do consumo e tarifa local.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFÍCIOS -->
+  <section id="beneficios" class="py-16 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold">Por que usar o <span class="text-brand-700">SolarEconomia</span>?</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Item -->
+        <div class="rounded-2xl bg-slate-50 p-6 shadow-sm">
+          <div class="h-10 w-10 rounded-lg bg-solar/20 flex items-center justify-center">
+            <span class="text-solar text-xl">💰</span>
+          </div>
+          <h3 class="mt-4 font-semibold">Economia real</h3>
+          <p class="mt-2 text-sm text-slate-600">Descubra quanto pode poupar ao adotar energia solar, com estimativas claras e acionáveis.</p>
+        </div>
+        <div class="rounded-2xl bg-slate-50 p-6 shadow-sm">
+          <div class="h-10 w-10 rounded-lg bg-brand-100 flex items-center justify-center">
+            <span class="text-brand-700 text-xl">🌎</span>
+          </div>
+          <h3 class="mt-4 font-semibold">Impacto ambiental</h3>
+          <p class="mt-2 text-sm text-slate-600">Visualize a redução de emissões de CO₂ e seu papel na sustentabilidade.</p>
+        </div>
+        <div class="rounded-2xl bg-slate-50 p-6 shadow-sm">
+          <div class="h-10 w-10 rounded-lg bg-emerald-100 flex items-center justify-center">
+            <span class="text-emerald-700 text-xl">📚</span>
+          </div>
+          <h3 class="mt-4 font-semibold">Aprendizado prático</h3>
+          <p class="mt-2 text-sm text-slate-600">Conteúdo e simulações didáticas para entender conceitos de energia renovável.</p>
+        </div>
+        <div class="rounded-2xl bg-slate-50 p-6 shadow-sm">
+          <div class="h-10 w-10 rounded-lg bg-indigo-100 flex items-center justify-center">
+            <span class="text-indigo-700 text-xl">🧮</span>
+          </div>
+          <h3 class="mt-4 font-semibold">Planejamento</h3>
+          <p class="mt-2 text-sm text-slate-600">Relatórios com ROI, payback e dimensionamento estimado do sistema.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona" class="py-16 bg-slate-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-3xl font-bold">Como funciona</h2>
+          <ol class="mt-6 space-y-4">
+            <li class="flex gap-4"><span class="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-solar text-white font-bold">1</span>
+              <p><strong>Informe seu consumo mensal</strong> (kWh) e sua tarifa aproximada.</p></li>
+            <li class="flex gap-4"><span class="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-600 text-white font-bold">2</span>
+              <p><strong>Rodamos a simulação</strong> de economia e impacto ambiental.</p></li>
+            <li class="flex gap-4"><span class="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white font-bold">3</span>
+              <p><strong>Veja ROI e payback</strong> estimados com base nos dados informados.</p></li>
+            <li class="flex gap-4"><span class="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">4</span>
+              <p><strong>Baixe o relatório</strong> com seus resultados e próximos passos.</p></li>
+          </ol>
+        </div>
+        <div class="glass rounded-2xl p-6 shadow-soft">
+          <h3 class="text-xl font-semibold">Pré‑visualização do Relatório</h3>
+          <div class="mt-4 grid grid-cols-2 gap-4 text-sm">
+            <div class="rounded-xl bg-white p-4 shadow-sm">
+              <p class="text-slate-500">Consumo informado</p>
+              <p class="mt-1 text-lg font-bold">450 kWh/mês</p>
+            </div>
+            <div class="rounded-xl bg-white p-4 shadow-sm">
+              <p class="text-slate-500">Tarifa média</p>
+              <p class="mt-1 text-lg font-bold">R$ 0,95/kWh</p>
+            </div>
+            <div class="col-span-2 rounded-xl bg-white p-4 shadow-sm">
+              <p class="text-slate-500">Economia anual estimada</p>
+              <p class="mt-1 text-xl font-bold">R$ 2.616</p>
+            </div>
+          </div>
+          <p class="mt-3 text-[12px] text-slate-500">Exemplo ilustrativo. Substitua pelos dados reais do usuário.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VTA -->
+  <section id="vta" class="py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold">VTA – Valor Total Agregado</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
+          <h3 class="font-semibold">Valor Econômico</h3>
+          <p class="mt-2 text-sm text-slate-600">Redução da conta de luz e previsibilidade de gastos por meio do simulador.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
+          <h3 class="font-semibold">Valor Ambiental</h3>
+          <p class="mt-2 text-sm text-slate-600">Cálculo transparente das emissões evitadas de CO₂.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
+          <h3 class="font-semibold">Valor Educacional</h3>
+          <p class="mt-2 text-sm text-slate-600">Aprendizado em sustentabilidade com dados e visualizações simples.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FORM -->
+  <section id="cta" class="py-16 bg-gradient-to-br from-brand-50 to-slate-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <h2 class="text-3xl font-bold">Comece sua simulação agora</h2>
+        <p class="mt-3 text-slate-700">Preencha os campos e obtenha uma estimativa imediata de economia e impacto ambiental. Nenhum dado é salvo.</p>
+        <ul class="mt-4 space-y-2 text-sm text-slate-600">
+          <li>• Resultado instantâneo</li>
+          <li>• Sem cadastro</li>
+          <li>• Relatório para download</li>
+        </ul>
+      </div>
+      <form id="form-simulacao" class="rounded-2xl bg-white p-6 shadow-soft">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-slate-700">Consumo mensal (kWh)</label>
+            <input type="number" id="kwh" min="50" step="1" placeholder="Ex.: 450" class="mt-1 w-full rounded-xl border-slate-300 focus:border-solar focus:ring-solar" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Tarifa (R$/kWh)</label>
+            <input type="number" id="tarifa" min="0.1" step="0.01" placeholder="Ex.: 0,95" class="mt-1 w-full rounded-xl border-slate-300 focus:border-solar focus:ring-solar" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Irradiação (kWh/m²·dia)</label>
+            <input type="number" id="irradiacao" min="3" max="6.5" step="0.1" placeholder="Ex.: 5,0" class="mt-1 w-full rounded-xl border-slate-300 focus:border-solar focus:ring-solar" />
+            <p class="mt-1 text-[12px] text-slate-500">Opcional (valor médio Brasil 4,5–5,5)</p>
+          </div>
+          <div class="sm:col-span-2">
+            <button type="submit" class="w-full rounded-xl bg-solar px-6 py-3 font-semibold text-white shadow-soft hover:-translate-y-0.5 transition">Calcular economia</button>
+          </div>
+        </div>
+        <div id="resultado" class="mt-6 hidden">
+          <h4 class="font-semibold">Resultado</h4>
+          <div class="mt-3 grid gap-4 sm:grid-cols-3 text-center">
+            <div class="rounded-xl bg-slate-50 p-4">
+              <p class="text-xs text-slate-500">Economia/mês</p>
+              <p id="ecoMes" class="mt-1 text-xl font-extrabold">—</p>
+            </div>
+            <div class="rounded-xl bg-slate-50 p-4">
+              <p class="text-xs text-slate-500">CO₂ evitado</p>
+              <p id="co2Mes" class="mt-1 text-xl font-extrabold">—</p>
+            </div>
+            <div class="rounded-xl bg-slate-50 p-4">
+              <p class="text-xs text-slate-500">Payback</p>
+              <p id="payback" class="mt-1 text-xl font-extrabold">—</p>
+            </div>
+          </div>
+          <a id="downloadBtn" href="#" download="relatorio-simulacao.txt" class="mt-4 inline-flex rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-white/70">Baixar relatório (.txt)</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200 bg-white py-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-slate-600">© <span id="year"></span> SolarEconomia • Projeto UPX 3 • Feito com foco em educação e sustentabilidade.</p>
+      <div class="text-xs text-slate-500">Design responsivo • Acessível • SEO friendly</div>
+    </div>
+  </footer>
+
+  <script>
+    // Utilitário simples de formatação BRL
+    const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    // Cálculo simplificado e didático
+    // Hipóteses (educacionais):
+    // - Sistema compensa 85% do consumo informado
+    // - Custo por kWp instalado: R$ 5.500
+    // - 1 kWp gera ~130 kWh/mês (ajustado por irradiação se informado)
+    // - Fator de emissão evitado: 0,106 tCO2/MWh (106 kg/MWh)
+    document.getElementById('form-simulacao').addEventListener('submit', function(e){
+      e.preventDefault();
+      const kwh = parseFloat(document.getElementById('kwh').value.replace(',', '.'));
+      const tarifa = parseFloat(document.getElementById('tarifa').value.replace(',', '.'));
+      const irr = parseFloat((document.getElementById('irradiacao').value || '').replace(',', '.'));
+
+      if(isNaN(kwh) || isNaN(tarifa)) return;
+
+      const compensacao = 0.85 * kwh; // kWh/mês
+      const geracaoPorKwp = irr ? 130 * (irr/5) : 130; // ajuste simplificado
+      const kwpNecessario = Math.max(1, compensacao / geracaoPorKwp);
+      const custoSistema = kwpNecessario * 5500;
+      const economiaMes = compensacao * tarifa;
+      const co2kgMes = (compensacao/1000) * 106; // kg CO2 / mês
+      const paybackAnos = custoSistema / (economiaMes * 12);
+
+      // Atualiza UI
+      document.getElementById('ecoMes').textContent = brl(economiaMes);
+      document.getElementById('co2Mes').textContent = `${co2kgMes.toFixed(0)} kg`;
+      document.getElementById('payback').textContent = `${paybackAnos.toFixed(1)} anos`;
+      document.getElementById('resultado').classList.remove('hidden');
+
+      // Gera relatório .txt para download
+      const linhas = [
+        'Relatório de Simulação — SolarEconomia',
+        '--------------------------------------',
+        `Consumo informado: ${kwh.toFixed(0)} kWh/mês`,
+        `Tarifa: ${brl(tarifa)}/kWh`,
+        irr ? `Irradiação informada: ${irr.toFixed(1)} kWh/m²·dia` : 'Irradiação informada: —',
+        `Capacidade estimada do sistema: ${kwpNecessario.toFixed(2)} kWp`,
+        `Custo estimado do sistema: ${brl(custoSistema)}`,
+        `Economia mensal estimada: ${brl(economiaMes)}`,
+        `CO₂ evitado (mês): ${co2kgMes.toFixed(0)} kg`,
+        `Payback estimado: ${paybackAnos.toFixed(1)} anos`,
+        '',
+        'Observações:',
+        '- Cálculo didático (valores aproximados).',
+        '- Os resultados reais dependem de consumo, tarifa, localização e condições de instalação.'
+      ].join('\n');
+      const blob = new Blob([linhas], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const link = document.getElementById('downloadBtn');
+      link.href = url;
+
+      // Analytics: rolagem até resultado
+      document.getElementById('downloadBtn').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
